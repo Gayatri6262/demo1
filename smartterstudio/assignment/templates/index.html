@@ -1,0 +1,53 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+
+    <title>Home</title>
+  </head>
+  <body>
+  <div class="form-group" style="text-align: center; margin-left: 40px; margin-top:30px; width:50%; border:1px solid">
+      <h4>Form data insert</h4>
+<form method="post" action="{% url 'save_fruits' %}">
+    {% csrf_token %}
+    <input type="text" name="fruit_name" id="fruit_name" placeholder="Enter fruit name" class="form-control"><br>
+    <input type="number" name="fruit_price" id="fruit_price" placeholder="Enter fruit price" class="form-control"><br>
+    <input type="submit" value="submit" class="btn btn-success btn-lg btn-block"><br>
+</form>
+</div>
+<div>
+<table class="table table-bordered table-hover" align="center" style="text-align: center;margin-left: 40px; margin-top: 40px">
+    <tr>
+        <th>Sl.No</th>
+        <th>Name</th>
+        <th>Price</th>
+        <th>Edit</th>
+        <th>Delete</th>
+
+    </tr>
+    {% for x in data %}
+    <tr>
+        <td>{{forloop.counter}}</td>
+        <td>{{x.name}}</td>
+        <td>{{x.price}}</td>
+        <td><a href="{% url 'update_fruits' %}?id={{x.id}}" class="btn btn-primary">Edit</a></td>
+        <td><a href="{% url 'delete_fruits' %}?id={{x.id}}" class="btn btn-danger">Delete</a></td>
+    </tr>
+    {% endfor %}
+
+
+</table>
+</div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
+
+
+  </body>
+</html>
+
+
